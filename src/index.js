@@ -1,41 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import NameForm from './NameForm';
+import Welcome from './Welcome';
+import ListItems from './ListItems';
+import Calculator from './Calculator';
 
-// const Welcome = props => <h1>welcome {props.name}</h1>;
-class Welcome extends React.Component {
-	constructor (props){
-		super(props);
-		this.state = {
-			date: Date.now()
-		}
+
+class App extends React.Component {
+	state = {
+		isToggle: false
 	}
-	componentDidMount (){
-		this.timerId = setInterval(() => {
-			console.log(1)
-			this.tick();
-		}, 2000);
+
+	toggleFn = a => {
+		console.log(a)
+		this.setState(prevState => ({
+			isToggle: !prevState.isToggle
+		}));
 	}
-	compoenentWillUnmount (){
-		console.log(3)
-		clearInterval(timerId);
-	}
-	tick (){
-		this.setState({
-			date: Date.now()
-		})
-	}
+
 	render (){
-		return <h1>{this.state.date}</h1>;
+		const numbers = [1, 2, 3, 4, 5];
+
+		return (
+			<div>
+				<Welcome name="tom" />
+				<Welcome name="stoat" />
+				<Welcome name="wzf" />
+				<button onClick={e => this.toggleFn('hello')}>{this.state.isToggle ? 'OFF': 'ON'}</button>
+				{this.state.isToggle && <h2>btn is on</h2>}
+				{this.state.isToggle ? <h2>btn is on</h2> : ''}
+				<ListItems numbers={numbers} />
+				<ul>
+					{numbers.map((num, key) => <li key={key}>{num}</li>)}
+				</ul>
+				<NameForm />
+				<Calculator />
+			</div>
+		);
 	}
-}
-const App = props => {
-	return (
-		<div>
-			<Welcome name="tom" />
-			<Welcome name="stoat" />
-			<Welcome name="wzf" />
-		</div>
-	);
 }
 
 ReactDOM.render(
