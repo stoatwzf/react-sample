@@ -4,8 +4,25 @@ import NameForm from './NameForm';
 import Welcome from './Welcome';
 import ListItems from './ListItems';
 import Calculator from './Calculator';
+import Banner from './Banner';
+import SignUpDialog from './SignUpDialog';
+import FilterableProductTable from './FilterableProductTable';
 
-
+const Top = props => {
+	return <h1>Top</h1>;
+}
+const Bottom = props => {
+	return <h1>Bottom</h1>;
+}
+class Diaolog extends React.Component {
+	render (){
+		return (<div>
+			<p>----------------------------------------</p>
+			{this.props.children}
+			<p>----------------------------------------</p>
+		</div>);
+	}
+}
 class App extends React.Component {
 	state = {
 		isToggle: false
@@ -23,7 +40,7 @@ class App extends React.Component {
 
 		return (
 			<div>
-				<Welcome name="tom" />
+				{/*<Welcome name="tom" />
 				<Welcome name="stoat" />
 				<Welcome name="wzf" />
 				<button onClick={e => this.toggleFn('hello')}>{this.state.isToggle ? 'OFF': 'ON'}</button>
@@ -35,6 +52,13 @@ class App extends React.Component {
 				</ul>
 				<NameForm />
 				<Calculator />
+				<Diaolog>
+					<h1>captial</h1>
+					<h2>author</h2>
+				</Diaolog>
+				<Banner top={<Top />} bottom={<Bottom />} />
+				<SignUpDialog />*/}
+				<FilterableProductTable />
 			</div>
 		);
 	}

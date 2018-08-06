@@ -1,0 +1,38 @@
+[
+	{
+		"category": "Sporting Goods",
+		"price": "$4.99",
+		"stocked": true,
+		"name": "Football"
+	},
+	{
+		"category": "Sporting Goods",
+		"price": "$32",
+		"stocked": true,
+		"name": "Baseball"
+	},
+	{
+		"category": "Sporting Goods",
+		"price": "$3",
+		"stocked": false,
+		"name": "Basketball"
+	},
+	{
+		"category": "Electronics",
+		"price": "$133",
+		"stocked": true,
+		"name": "iPod Touch"
+	},
+	{
+		"category": "Electronics",
+		"price": "$42",
+		"stocked": false,
+		"name": "iPhone 5"
+	},
+	{
+		"category": "Electronics",
+		"price": "$41",
+		"stocked": true,
+		"name": "Nexus 7"
+	}
+]
