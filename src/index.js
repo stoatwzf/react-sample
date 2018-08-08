@@ -9,6 +9,10 @@ import Banner from './Banner';
 import SignUpDialog from './SignUpDialog';
 import FilterableProductTable from './FilterableProductTable';
 import ChildFn from './ChildFn';
+import Unform from './Unform';
+import {themes, ThemeContext} from './makeContext';
+import { TypeContext } from './typeContext';
+import Toolbar from './Toolbar';
 
 const Top = props => {
 	return <h1>Top</h1>;
@@ -19,6 +23,15 @@ const Bottom = props => {
 const Hello = props => {
 	return [<h2 key="0">hello {props.a}</h2>, <h2 key="1">hello {props.b}</h2>];
 }
+const LiList = props => {
+	return (<React.Fragment>
+		<li>sad</li>
+		<li>sad</li>
+		<li>sad</li>
+		<li>sad</li>
+	</React.Fragment>)
+}
+
 class Diaolog extends React.Component {
 	render (){
 		return (<div>
@@ -30,7 +43,8 @@ class Diaolog extends React.Component {
 }
 class App extends React.Component {
 	state = {
-		isToggle: false
+		isToggle: false,
+		theme: themes.light
 	}
 
 	toggleFn = a => {
@@ -46,12 +60,19 @@ class App extends React.Component {
 		this.focusRef.focus();
 	}
 
+	toggleTheme = () => {
+		this.setState(state => ({
+			theme: state.theme === themes.dark ? themes.light : themes.dark
+		}));
+	}
+
 	render (){
 		const numbers = [1, 2, 3, 4, 5];
 		const obj = { a: 1, b: 2};
 
 		return (
-			<div>
+			<ThemeContext.Provider value={this.state.theme}>
+				<TypeContext.Provider value="hello context">
 				{/*<Welcome name="tom" />
 				<Welcome name="stoat" />
 				<Welcome name="wzf" />
@@ -69,11 +90,18 @@ class App extends React.Component {
 					<h2>author</h2>
 				</Diaolog>
 				<Banner top={<Top />} bottom={<Bottom />} />
-				<SignUpDialog />*/}
+				<SignUpDialog />
 				<FilterableProductTable RefHandler={this.RefHandler} inputRef={el => this.focusRef = el} />
 				<ChildFn />
 				<Hello {...obj}/>
-			</div>
+				<Unform />
+				*/}
+				<Toolbar changeTheme={this.toggleTheme} />
+				</TypeContext.Provider>
+				<ul>
+					<LiList />
+				</ul>
+			</ThemeContext.Provider>
 		);
 	}
 }
