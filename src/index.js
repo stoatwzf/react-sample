@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
 import NameForm from './NameForm';
@@ -7,12 +8,16 @@ import Calculator from './Calculator';
 import Banner from './Banner';
 import SignUpDialog from './SignUpDialog';
 import FilterableProductTable from './FilterableProductTable';
+import ChildFn from './ChildFn';
 
 const Top = props => {
 	return <h1>Top</h1>;
 }
 const Bottom = props => {
 	return <h1>Bottom</h1>;
+}
+const Hello = props => {
+	return [<h2 key="0">hello {props.a}</h2>, <h2 key="1">hello {props.b}</h2>];
 }
 class Diaolog extends React.Component {
 	render (){
@@ -35,8 +40,15 @@ class App extends React.Component {
 		}));
 	}
 
+
+	RefHandler = () => {
+		console.log(1111)
+		this.focusRef.focus();
+	}
+
 	render (){
 		const numbers = [1, 2, 3, 4, 5];
+		const obj = { a: 1, b: 2};
 
 		return (
 			<div>
@@ -58,7 +70,9 @@ class App extends React.Component {
 				</Diaolog>
 				<Banner top={<Top />} bottom={<Bottom />} />
 				<SignUpDialog />*/}
-				<FilterableProductTable />
+				<FilterableProductTable RefHandler={this.RefHandler} inputRef={el => this.focusRef = el} />
+				<ChildFn />
+				<Hello {...obj}/>
 			</div>
 		);
 	}

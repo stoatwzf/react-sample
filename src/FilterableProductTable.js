@@ -14,10 +14,10 @@ class SearchBar extends React.Component {
 	}
 	render (){
 		return (<div className="searchBar">
-			<input value={this.props.filterText} onChange={this.textChange} />
+			<input ref={this.props.inputRef} value={this.props.filterText} onChange={this.textChange} />
 			<br />
 			<input type="checkbox" checked={this.props.inStockOnly} onChange={this.stockChange} />
-			<label>Only show products in stock.</label>
+			<label onClick={this.props.RefHandler} >Only show products in stock.</label>
 		</div>);
 	}
 }
@@ -106,6 +106,7 @@ class FilterableProductTable extends React.Component {
 				filterText={this.state.filterText}
 				inStockOnly={this.state.inStockOnly}
 				onChange={this.changeHandler}
+				{...this.props}
 			/>
 			<ProductTable productList={this.state.productList}  />
 		</div>);
