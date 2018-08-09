@@ -13,6 +13,9 @@ import Unform from './Unform';
 import {themes, ThemeContext} from './makeContext';
 import { TypeContext } from './typeContext';
 import Toolbar from './Toolbar';
+import Portal from './Portal';
+import CommentList from './CommentList';
+
 
 const Top = props => {
 	return <h1>Top</h1>;
@@ -31,20 +34,28 @@ const LiList = props => {
 		<li>sad</li>
 	</React.Fragment>)
 }
+const testDec = (name, age) => {
+	return target => {
+		target.prototype.dename = name;
+	}
+}
 
+@testDec('王麻子', 22)
 class Diaolog extends React.Component {
+	static deemail = '@.con'
 	render (){
 		return (<div>
-			<p>----------------------------------------</p>
+			<p>--------------{this.dename}--------------------------</p>
 			{this.props.children}
-			<p>----------------------------------------</p>
+			<p>----------------{this.deemail}------------------------</p>
 		</div>);
 	}
 }
 class App extends React.Component {
 	state = {
 		isToggle: false,
-		theme: themes.light
+		theme: themes.light,
+		isError: false
 	}
 
 	toggleFn = a => {
@@ -66,14 +77,24 @@ class App extends React.Component {
 		}));
 	}
 
+	componentDidCatch (err, info){
+		this.setState({
+			isError: true
+		});
+	}
+
 	render (){
 		const numbers = [1, 2, 3, 4, 5];
 		const obj = { a: 1, b: 2};
 
+		if (this.state.isError){
+			return <h1>Something went wrong.</h1>;
+		}
 		return (
 			<ThemeContext.Provider value={this.state.theme}>
+				{/*
 				<TypeContext.Provider value="hello context">
-				{/*<Welcome name="tom" />
+				<Welcome name="tom" />
 				<Welcome name="stoat" />
 				<Welcome name="wzf" />
 				<button onClick={e => this.toggleFn('hello')}>{this.state.isToggle ? 'OFF': 'ON'}</button>
@@ -85,22 +106,24 @@ class App extends React.Component {
 				</ul>
 				<NameForm />
 				<Calculator />
-				<Diaolog>
-					<h1>captial</h1>
-					<h2>author</h2>
-				</Diaolog>
 				<Banner top={<Top />} bottom={<Bottom />} />
 				<SignUpDialog />
 				<FilterableProductTable RefHandler={this.RefHandler} inputRef={el => this.focusRef = el} />
 				<ChildFn />
 				<Hello {...obj}/>
 				<Unform />
-				*/}
 				<Toolbar changeTheme={this.toggleTheme} />
 				</TypeContext.Provider>
 				<ul>
 					<LiList />
 				</ul>
+				<Portal />
+				*/}
+				<Diaolog>
+					<h1>captial</h1>
+					<h2>author</h2>
+				</Diaolog>
+				<CommentList />
 			</ThemeContext.Provider>
 		);
 	}
