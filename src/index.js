@@ -15,6 +15,7 @@ import { TypeContext } from './typeContext';
 import Toolbar from './Toolbar';
 import Portal from './Portal';
 import CommentList from './CommentList';
+import MouseTracker from './MouseTracker';
 
 
 const Top = props => {
@@ -55,7 +56,7 @@ class App extends React.Component {
 	state = {
 		isToggle: false,
 		theme: themes.light,
-		isError: false
+		isError: false,
 	}
 
 	toggleFn = a => {
@@ -81,6 +82,11 @@ class App extends React.Component {
 		this.setState({
 			isError: true
 		});
+	}
+
+	refHandler = el => {
+		console.log(el);
+		// el.style.border = '2px solid red'
 	}
 
 	render (){
@@ -118,12 +124,14 @@ class App extends React.Component {
 					<LiList />
 				</ul>
 				<Portal />
-				*/}
 				<Diaolog>
 					<h1>captial</h1>
 					<h2>author</h2>
 				</Diaolog>
-				<CommentList />
+				<div>123</div>
+				<CommentList ref={this.refHandler} />
+				*/}
+				<MouseTracker />
 			</ThemeContext.Provider>
 		);
 	}

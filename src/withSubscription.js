@@ -2,15 +2,19 @@ import React from 'react';
 
 const withSubscription = data => {
 	return Target => {
-		return class extends React.Component {
+		class SubScr extends React.Component {
 			state = {
 				data: data
 			}
 
 			render (){
-				return <Target data={this.state.data} {...this.props} />
+				return <Target ref={this.props.forwardedRef} data={this.state.data} {...this.props} />;
 			}
 		}
+
+		return React.forwardRef((props, ref) => {
+			return <SubScr forwardedRef={ref} {...props} />
+		});
 	}
 }
 

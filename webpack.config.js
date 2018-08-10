@@ -18,6 +18,10 @@ const config = {
 						plugins: ['transform-class-properties', 'transform-decorators-legacy']
 					}
 				}
+			},
+			{
+				test: /\.(jpg|png|gif)$/,
+				use: "file-loader"
 			}
 		]
 	},
