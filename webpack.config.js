@@ -2,7 +2,7 @@ const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const config = {
-	entry: './src/index.js',
+	entry: './src/app.js',
 	output: {
 		path: resolve(__dirname, './dist'),
 		filename: 'main.bundle.js'
@@ -22,6 +22,10 @@ const config = {
 			{
 				test: /\.(jpg|png|gif)$/,
 				use: "file-loader"
+			},
+			{
+				test: /\.css$/,
+				use: ['style-loader', 'css-loader']
 			}
 		]
 	},
