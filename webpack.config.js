@@ -2,7 +2,8 @@ const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const config = {
-	entry: './src/app.js',
+	mode: 'development',
+	entry: './src/router_index.js',
 	output: {
 		path: resolve(__dirname, './dist'),
 		filename: 'main.bundle.js'
@@ -15,7 +16,11 @@ const config = {
 					loader: 'babel-loader',
 					options: {
 						presets: ['env', 'react', 'flow'],
-						plugins: ['transform-class-properties', 'transform-decorators-legacy']
+						plugins: [
+							'transform-class-properties',
+							'transform-decorators-legacy',
+							'transform-object-rest-spread'
+						]
 					}
 				}
 			},
@@ -38,8 +43,7 @@ const config = {
 	devServer: {
 		contentBase: './dist',
 		port: '8181'
-	},
-	mode: 'production'
+	}
 };
 
 module.exports = config;
